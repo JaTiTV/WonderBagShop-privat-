@@ -40,7 +40,6 @@ public class GUI_Chest1 {
         Inventory inventory = Bukkit.createInventory((InventoryHolder) null, 9 * 3, GUI_Chest1_name);
         File WB1ChestYML = new File(Bukkit.getServer().getPluginManager().getPlugin("WonderBagShop").getDataFolder() + "/WonderBags/Chest/" + "small.yml");
         YamlConfiguration yamlConfiguration_WB1_Chest = YamlConfiguration.loadConfiguration(WB1ChestYML);
-
         ItemStack glass = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
         ItemMeta itemMetaglass = glass.getItemMeta();
         itemMetaglass.setDisplayName(" ");
@@ -49,6 +48,7 @@ public class GUI_Chest1 {
         for (int i = 0; i < 9 * 3; i++) {
             inventory.setItem(i, glass);
         }
+
 
         ItemStack Name = new ItemStack(Material.YELLOW_WOOL);
         ItemMeta itemMetaName = Name.getItemMeta();
