@@ -4,6 +4,14 @@
 
 ---
 
+
+# Links
+* [Download](https://www.spigotmc.org/resources/wonderbagshop.89234/)
+* [Discord](http://dc.T2Code.net)
+* [Translations](https://github.com/JaTiTV/WonderBagShop-privat-/tree/master/Languages)
+
+---
+
 ### English
 
 With the WonderBagShop players can buy 3 different WonderBags (boxes) with random items in them.
@@ -42,10 +50,3 @@ Standardmäßig werden auch Items aus der 1.16 verwendet!
 Dies wird mit späteren Versionen geändert.
 
 Komm für weitere Fragen einfach auf den Support Discord.
-
----
-
-# Links
-* [Download](https://www.spigotmc.org/resources/wonderbagshop.89234/)
-* [Discord](https://discord.gg/vRyXFFterJ)
-* [Translations](https://github.com/JaTiTV/WonderBagShop-privat-/tree/master/Languages)
