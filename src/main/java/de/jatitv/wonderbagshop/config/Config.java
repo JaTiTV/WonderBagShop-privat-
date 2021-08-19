@@ -23,117 +23,119 @@ import java.io.File;
 import java.io.IOException;
 
 public class Config{
-
+    public static Integer ConfigVersion = 2;
 
     public static void configCreate() throws InterruptedException {
         Long long_ = Long.valueOf(System.currentTimeMillis());
 
         File configYML = new File(Main.thisp().getDataFolder().getPath(), "Config.yml");
-        YamlConfiguration yamlConfiguration_config = YamlConfiguration.loadConfiguration(configYML);
+        YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(configYML);
 
         Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Config.yml load...");
 
 
-        if (!yamlConfiguration_config.contains("Do_not_remove_or_change.Created")) {
-            yamlConfiguration_config.set("Do_not_remove_or_change.Created", "This file was created with version " + Main.getPlugin().getDescription().getVersion());
+        if (!yamlConfiguration.contains("Do_not_remove_or_change.Created")) {
+            yamlConfiguration.set("Do_not_remove_or_change.Created", "This file was created with version " + Main.getPlugin().getDescription().getVersion());
         }
 
-        yamlConfiguration_config.set("Do_not_remove_or_change.Version", Main.getPlugin().getDescription().getVersion());
+        yamlConfiguration.set("Do_not_remove_or_change.Version", Main.getPlugin().getDescription().getVersion());
 
-        yamlConfiguration_config.set("Do_not_remove_or_change.Autor", Main.Autor);
+        yamlConfiguration.set("Do_not_remove_or_change.Autor", Main.Autor);
 
-        yamlConfiguration_config.set("Do_not_remove_or_change.Spigot", Main.Spigot);
+        yamlConfiguration.set("Do_not_remove_or_change.Spigot", Main.Spigot);
 
-        yamlConfiguration_config.set("Do_not_remove_or_change.Discord", Main.Discord);
+        yamlConfiguration.set("Do_not_remove_or_change.Discord", Main.Discord);
 
 
+        yamlConfiguration.set("ConfigVersion", ConfigVersion);
 
-        if (yamlConfiguration_config.contains("Plugin.UpdateCheckOnJoin")) {
-            DefaultValue.UpdateCheckOnJoin = yamlConfiguration_config.getBoolean("Plugin.UpdateCheckOnJoin");
+
+        if (yamlConfiguration.contains("Plugin.UpdateCheckOnJoin")) {
+            DefaultValue.UpdateCheckOnJoin = yamlConfiguration.getBoolean("Plugin.UpdateCheckOnJoin");
         } else {
-            yamlConfiguration_config.set("Plugin.UpdateCheckOnJoin", true);
+            yamlConfiguration.set("Plugin.UpdateCheckOnJoin", true);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6UpdateCheckOnJoin §4was added to §9Config.yml§4!");
         }
-        if (yamlConfiguration_config.contains("Plugin.language")) {
-            DefaultValue.language = yamlConfiguration_config.getString("Plugin.language");
+        if (yamlConfiguration.contains("Plugin.language")) {
+            DefaultValue.language = yamlConfiguration.getString("Plugin.language");
         } else {
-            yamlConfiguration_config.set("Plugin.language", DefaultValue.language);
+            yamlConfiguration.set("Plugin.language", DefaultValue.language);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6language §4was added to §9Config.yml§4!");
         }
 
-        if (yamlConfiguration_config.contains("Plugin.Debug.Enable")) {
-            DefaultValue.Debug = yamlConfiguration_config.getBoolean("Plugin.Debug.Enable");
+        if (yamlConfiguration.contains("Plugin.Debug.Enable")) {
+            DefaultValue.Debug = yamlConfiguration.getBoolean("Plugin.Debug.Enable");
         } else {
-            yamlConfiguration_config.set("Plugin.Debug.Enable", false);
+            yamlConfiguration.set("Plugin.Debug.Enable", false);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Debug Enable §4was added to §9Config.yml§4!");
         }
 
-        if (yamlConfiguration_config.contains("Plugin.Debug.DebugStage_(1-3)")) {
-            DefaultValue.DebugStage = yamlConfiguration_config.getInt("Plugin.Debug.DebugStage_(1-3)");
+        if (yamlConfiguration.contains("Plugin.Debug.DebugStage_(1-3)")) {
+            DefaultValue.DebugStage = yamlConfiguration.getInt("Plugin.Debug.DebugStage_(1-3)");
         } else {
-            yamlConfiguration_config.set("Plugin.Debug.DebugStage_(1-3)", 1);
+            yamlConfiguration.set("Plugin.Debug.DebugStage_(1-3)", 1);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6DebugStage §4was added to §9Config.yml§4!");
         }
-        if (yamlConfiguration_config.getInt("Plugin.Debug.DebugStage_(1-3)") > 3) {
-            yamlConfiguration_config.set("Plugin.Debug.DebugStage_(1-3)", 3);
+        if (yamlConfiguration.getInt("Plugin.Debug.DebugStage_(1-3)") > 3) {
+            yamlConfiguration.set("Plugin.Debug.DebugStage_(1-3)", 3);
         }
-        if (yamlConfiguration_config.getInt("Plugin.Debug.DebugStage_(1-3)") < 1) {
-            yamlConfiguration_config.set("Plugin.Debug.DebugStage_(1-3)", 1);
+        if (yamlConfiguration.getInt("Plugin.Debug.DebugStage_(1-3)") < 1) {
+            yamlConfiguration.set("Plugin.Debug.DebugStage_(1-3)", 1);
         }
 
-        if (yamlConfiguration_config.contains("Shop.GUI_Name")) {
-            DefaultValue.GUI_Name = replace(yamlConfiguration_config.getString("Shop.GUI_Name"));
+        if (yamlConfiguration.contains("Shop.GUI_Name")) {
+            DefaultValue.GUI_Name = replace(yamlConfiguration.getString("Shop.GUI_Name"));
         } else {
-            yamlConfiguration_config.set("Shop.GUI_Name", "&2Wonder&6Bag&9Shop");
+            yamlConfiguration.set("Shop.GUI_Name", "&2Wonder&6Bag&9Shop");
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6ShopName_GUI §4was added to §9Config.yml§4!");
         }
 
-        if (yamlConfiguration_config.contains("Shop.Currency")) {
-            DefaultValue.Currency = yamlConfiguration_config.getString("Shop.Currency");
+        if (yamlConfiguration.contains("Shop.Currency")) {
+            DefaultValue.Currency = yamlConfiguration.getString("Shop.Currency");
         } else {
-            yamlConfiguration_config.set("Shop.Currency", "$");
+            yamlConfiguration.set("Shop.Currency", "$");
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Currency §4was added to §9Config.yml§4!");
         }
 
-        if (yamlConfiguration_config.contains("Shop.ItemNumbers")) {
-            DefaultValue.ItemNumbers = yamlConfiguration_config.getBoolean("Shop.ItemNumbers");
+        if (yamlConfiguration.contains("Shop.ItemNumbers")) {
+            DefaultValue.ItemNumbers = yamlConfiguration.getBoolean("Shop.ItemNumbers");
         } else {
-            yamlConfiguration_config.set("Shop.ItemNumbers", true);
+            yamlConfiguration.set("Shop.ItemNumbers", true);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6ItemNumbers §4was added to §9Config.yml§4!");
         }
 
-        if (yamlConfiguration_config.contains("WonderBags.UseChest")) {
-            DefaultValue.UseChest = yamlConfiguration_config.getBoolean("WonderBags.UseChest");
+        if (yamlConfiguration.contains("WonderBags.UseChest")) {
+            DefaultValue.UseChest = yamlConfiguration.getBoolean("WonderBags.UseChest");
         } else {
-            yamlConfiguration_config.set("WonderBags.UseChest", true);
+            yamlConfiguration.set("WonderBags.UseChest", true);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6UseChest §4was added to §9Config.yml§4!");
         }
 
-        if (yamlConfiguration_config.contains("WonderBags.UseChest_and_Item")) {
-            DefaultValue.UseChest_and_Item = yamlConfiguration_config.getBoolean("WonderBags.UseChest_and_Item");
+        if (yamlConfiguration.contains("WonderBags.UseChest_and_Item")) {
+            DefaultValue.UseChest_and_Item = yamlConfiguration.getBoolean("WonderBags.UseChest_and_Item");
         } else {
-            yamlConfiguration_config.set("WonderBags.UseChest_and_Item", true);
+            yamlConfiguration.set("WonderBags.UseChest_and_Item", true);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6UseChest_and_Item §4was added to §9Config.yml§4!");
         }
 
-        if (yamlConfiguration_config.contains("WonderBags.ChestDrop")) {
-            DefaultValue.ChestDrop = yamlConfiguration_config.getBoolean("WonderBags.ChestDrop");
+        if (yamlConfiguration.contains("WonderBags.ChestDrop")) {
+            DefaultValue.ChestDrop = yamlConfiguration.getBoolean("WonderBags.ChestDrop");
         } else {
-            yamlConfiguration_config.set("WonderBags.ChestDrop", false);
+            yamlConfiguration.set("WonderBags.ChestDrop", false);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6ChestDrop §4was added to §9Config.yml§4!");
         }
 
-        if (yamlConfiguration_config.contains("WonderBags.RemoveChestInCreativemode")) {
-            DefaultValue.RemoveChestInCreativemode = yamlConfiguration_config.getBoolean("WonderBags.RemoveChestInCreativemode");
+        if (yamlConfiguration.contains("WonderBags.RemoveChestInCreativemode")) {
+            DefaultValue.RemoveChestInCreativemode = yamlConfiguration.getBoolean("WonderBags.RemoveChestInCreativemode");
         } else {
-            yamlConfiguration_config.set("WonderBags.RemoveChestInCreativemode", true);
+            yamlConfiguration.set("WonderBags.RemoveChestInCreativemode", true);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6RemoveChestInCreativemode §4was added to §9Config.yml§4!");
         }
 
-        if (yamlConfiguration_config.contains("WonderBags.RemoveUseItemByUse")) {
-            DefaultValue.RemoveUseItemByUse = yamlConfiguration_config.getBoolean("WonderBags.RemoveUseItemByUse");
+        if (yamlConfiguration.contains("WonderBags.RemoveUseItemByUse")) {
+            DefaultValue.RemoveUseItemByUse = yamlConfiguration.getBoolean("WonderBags.RemoveUseItemByUse");
         } else {
-            yamlConfiguration_config.set("WonderBags.RemoveUseItemByUse", true);
+            yamlConfiguration.set("WonderBags.RemoveUseItemByUse", true);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6RemoveUseItemByUse §4was added to §9Config.yml§4!");
         }
 
@@ -141,93 +143,93 @@ public class Config{
          *Sound
          */
 
-        if (yamlConfiguration_config.contains("Sound.Enable")) {
-            DefaultValue.Sound_Enable = yamlConfiguration_config.getBoolean("Sound.Enable");
+        if (yamlConfiguration.contains("Sound.Enable")) {
+            DefaultValue.Sound_Enable = yamlConfiguration.getBoolean("Sound.Enable");
         } else {
-            yamlConfiguration_config.set("Sound.Enable", true);
+            yamlConfiguration.set("Sound.Enable", true);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Sound Enable §4was added to §9Config.yml§4!");
         }
 
-        if (yamlConfiguration_config.contains("Sound.Buy.Enable")) {
-            DefaultValue.Sound_Shop_Buy_Enable = yamlConfiguration_config.getBoolean("Sound.Buy.Enable");
+        if (yamlConfiguration.contains("Sound.Buy.Enable")) {
+            DefaultValue.Sound_Shop_Buy_Enable = yamlConfiguration.getBoolean("Sound.Buy.Enable");
         } else {
-            yamlConfiguration_config.set("Sound.Buy.Enable", true);
+            yamlConfiguration.set("Sound.Buy.Enable", true);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Sound Buy Enable §4was added to §9Config.yml§4!");
         }
-        if (yamlConfiguration_config.contains("Sound.Buy.Sound")) {
-            DefaultValue.Sound_Shop_Buy_input = replace(yamlConfiguration_config.getString("Sound.Buy.Sound").toUpperCase().replace(".", "_"));
+        if (yamlConfiguration.contains("Sound.Buy.Sound")) {
+            DefaultValue.Sound_Shop_Buy_input = replace(yamlConfiguration.getString("Sound.Buy.Sound").toUpperCase().replace(".", "_"));
         } else {
-            yamlConfiguration_config.set("Sound.Buy.Sound", "ENTITY_PLAYER_LEVELUP");
+            yamlConfiguration.set("Sound.Buy.Sound", "ENTITY_PLAYER_LEVELUP");
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Sound Buy §4was added to §9Config.yml§4!");
         }
 
 
-        if (yamlConfiguration_config.contains("Sound.NoMoney.Enable")) {
-            DefaultValue.Sound_Shop_NoMoney_Enable = yamlConfiguration_config.getBoolean("Sound.NoMoney.Enable");
+        if (yamlConfiguration.contains("Sound.NoMoney.Enable")) {
+            DefaultValue.Sound_Shop_NoMoney_Enable = yamlConfiguration.getBoolean("Sound.NoMoney.Enable");
         } else {
-            yamlConfiguration_config.set("Sound.NoMoney.Enable", true);
+            yamlConfiguration.set("Sound.NoMoney.Enable", true);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Sound NoMoney Enable §4was added to §9Config.yml§4!");
         }
-        if (yamlConfiguration_config.contains("Sound.NoMoney.Sound")) {
-            DefaultValue.Sound_Shop_NoMoney_input = replace(yamlConfiguration_config.getString("Sound.NoMoney.Sound").toUpperCase().replace(".", "_"));
+        if (yamlConfiguration.contains("Sound.NoMoney.Sound")) {
+            DefaultValue.Sound_Shop_NoMoney_input = replace(yamlConfiguration.getString("Sound.NoMoney.Sound").toUpperCase().replace(".", "_"));
         } else {
-            yamlConfiguration_config.set("Sound.NoMoney.Sound", "BLOCK_NOTE_BLOCK_HARP");
+            yamlConfiguration.set("Sound.NoMoney.Sound", "BLOCK_NOTE_BLOCK_HARP");
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Sound NoMoney §4was added to §9Config.yml§4!");
         }
 
 
-        if (yamlConfiguration_config.contains("Sound.NoInventorySpace.Enable")) {
-            DefaultValue.Sound_Shop_NoInventorySpace_Enable = yamlConfiguration_config.getBoolean("Sound.NoInventorySpace.Enable");
+        if (yamlConfiguration.contains("Sound.NoInventorySpace.Enable")) {
+            DefaultValue.Sound_Shop_NoInventorySpace_Enable = yamlConfiguration.getBoolean("Sound.NoInventorySpace.Enable");
         } else {
-            yamlConfiguration_config.set("Sound.NoInventorySpace.Enable", true);
+            yamlConfiguration.set("Sound.NoInventorySpace.Enable", true);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Sound NoInventorySpace Enable §4was added to §9Config.yml§4!");
         }
-        if (yamlConfiguration_config.contains("Sound.NoInventorySpace.Sound")) {
-            DefaultValue.Sound_Shop_NoInventorySpace_input = replace(yamlConfiguration_config.getString("Sound.NoInventorySpace.Sound").toUpperCase().replace(".", "_"));
+        if (yamlConfiguration.contains("Sound.NoInventorySpace.Sound")) {
+            DefaultValue.Sound_Shop_NoInventorySpace_input = replace(yamlConfiguration.getString("Sound.NoInventorySpace.Sound").toUpperCase().replace(".", "_"));
         } else {
-            yamlConfiguration_config.set("Sound.NoInventorySpace.Sound", "BLOCK_NOTE_BLOCK_GUITAR");
+            yamlConfiguration.set("Sound.NoInventorySpace.Sound", "BLOCK_NOTE_BLOCK_GUITAR");
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Sound NoInventorySpace §4was added to §9Config.yml§4!");
         }
 
 
-        if (yamlConfiguration_config.contains("Sound.Give.Enable")) {
-            DefaultValue.Sound_Give_Enable = yamlConfiguration_config.getBoolean("Sound.Give.Enable");
+        if (yamlConfiguration.contains("Sound.Give.Enable")) {
+            DefaultValue.Sound_Give_Enable = yamlConfiguration.getBoolean("Sound.Give.Enable");
         } else {
-            yamlConfiguration_config.set("Sound.Give.Enable", true);
+            yamlConfiguration.set("Sound.Give.Enable", true);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Sound Give Enable §4was added to §9Config.yml§4!");
         }
-        if (yamlConfiguration_config.contains("Sound.Give.Sound")) {
-            DefaultValue.Sound_Give_input = replace(yamlConfiguration_config.getString("Sound.Give.Sound").toUpperCase().replace(".", "_"));
+        if (yamlConfiguration.contains("Sound.Give.Sound")) {
+            DefaultValue.Sound_Give_input = replace(yamlConfiguration.getString("Sound.Give.Sound").toUpperCase().replace(".", "_"));
         } else {
-            yamlConfiguration_config.set("Sound.Give.Sound", "ENTITY_PLAYER_LEVELUP");
+            yamlConfiguration.set("Sound.Give.Sound", "ENTITY_PLAYER_LEVELUP");
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Sound Give §4was added to §9Config.yml§4!");
         }
 
 
-        if (yamlConfiguration_config.contains("Sound.Gift.Enable")) {
-            DefaultValue.Sound_Gift_Enable = yamlConfiguration_config.getBoolean("Sound.Gift.Enable");
+        if (yamlConfiguration.contains("Sound.Gift.Enable")) {
+            DefaultValue.Sound_Gift_Enable = yamlConfiguration.getBoolean("Sound.Gift.Enable");
         } else {
-            yamlConfiguration_config.set("Sound.Gift.Enable", true);
+            yamlConfiguration.set("Sound.Gift.Enable", true);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Sound Gift Enable §4was added to §9Config.yml§4!");
         }
-        if (yamlConfiguration_config.contains("Sound.Gift.Sound")) {
-            DefaultValue.Sound_Gift_input = replace(yamlConfiguration_config.getString("Sound.Gift.Sound").toUpperCase().replace(".", "_"));
+        if (yamlConfiguration.contains("Sound.Gift.Sound")) {
+            DefaultValue.Sound_Gift_input = replace(yamlConfiguration.getString("Sound.Gift.Sound").toUpperCase().replace(".", "_"));
         } else {
-            yamlConfiguration_config.set("Sound.Gift.Sound", "ENTITY_PLAYER_LEVELUP");
+            yamlConfiguration.set("Sound.Gift.Sound", "ENTITY_PLAYER_LEVELUP");
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Sound Gift §4was added to §9Config.yml§4!");
         }
 
 
-        if (yamlConfiguration_config.contains("Sound.PlayerNotFound.Enable")) {
-            DefaultValue.Sound_PlayerNotFound_Enable = yamlConfiguration_config.getBoolean("Sound.PlayerNotFound.Enable");
+        if (yamlConfiguration.contains("Sound.PlayerNotFound.Enable")) {
+            DefaultValue.Sound_PlayerNotFound_Enable = yamlConfiguration.getBoolean("Sound.PlayerNotFound.Enable");
         } else {
-            yamlConfiguration_config.set("Sound.PlayerNotFound.Enable", true);
+            yamlConfiguration.set("Sound.PlayerNotFound.Enable", true);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Sound PlayerNotFound Enable §4was added to §9Config.yml§4!");
         }
-        if (yamlConfiguration_config.contains("Sound.PlayerNotFound.Sound")) {
-            DefaultValue.Sound_PlayerNotFound_input = replace(yamlConfiguration_config.getString("Sound.PlayerNotFound.Sound").toUpperCase().replace(".", "_"));
+        if (yamlConfiguration.contains("Sound.PlayerNotFound.Sound")) {
+            DefaultValue.Sound_PlayerNotFound_input = replace(yamlConfiguration.getString("Sound.PlayerNotFound.Sound").toUpperCase().replace(".", "_"));
         } else {
-            yamlConfiguration_config.set("Sound.PlayerNotFound.Sound", "BLOCK_NOTE_BLOCK_HARP");
+            yamlConfiguration.set("Sound.PlayerNotFound.Sound", "BLOCK_NOTE_BLOCK_HARP");
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Sound Send §4was added to §9Config.yml§4!");
         }
 
@@ -235,78 +237,78 @@ public class Config{
          * Title
          */
 
-        if (yamlConfiguration_config.contains("Title.Enable")) {
-            DefaultValue.Title_Enable = yamlConfiguration_config.getBoolean("Title.Enable");
+        if (yamlConfiguration.contains("Title.Enable")) {
+            DefaultValue.Title_Enable = yamlConfiguration.getBoolean("Title.Enable");
         } else {
-            yamlConfiguration_config.set("Title.Enable", true);
+            yamlConfiguration.set("Title.Enable", true);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Title Enable §4was added to §9Config.yml§4!");
         }
 
-        if (yamlConfiguration_config.contains("Title.Reload.Enable")) {
-            DefaultValue.Title_Reload_Enable = yamlConfiguration_config.getBoolean("Title.Reload.Enable");
+        if (yamlConfiguration.contains("Title.Reload.Enable")) {
+            DefaultValue.Title_Reload_Enable = yamlConfiguration.getBoolean("Title.Reload.Enable");
         } else {
-            yamlConfiguration_config.set("Title.Reload.Enable", true);
+            yamlConfiguration.set("Title.Reload.Enable", true);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Title Reload Enable §4was added to §9Config.yml§4!");
         }
 
-        if (yamlConfiguration_config.contains("Title.Buy.Enable")) {
-            DefaultValue.Title_Buy_Enable = yamlConfiguration_config.getBoolean("Title.Buy.Enable");
+        if (yamlConfiguration.contains("Title.Buy.Enable")) {
+            DefaultValue.Title_Buy_Enable = yamlConfiguration.getBoolean("Title.Buy.Enable");
         } else {
-            yamlConfiguration_config.set("Title.Buy.Enable", true);
+            yamlConfiguration.set("Title.Buy.Enable", true);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Title Buy Enable §4was added to §9Config.yml§4!");
         }
 
-        if (yamlConfiguration_config.contains("Title.NoMoney.Enable")) {
-            DefaultValue.Title_No_money_Enable = yamlConfiguration_config.getBoolean("Title.NoMoney.Enable");
+        if (yamlConfiguration.contains("Title.NoMoney.Enable")) {
+            DefaultValue.Title_No_money_Enable = yamlConfiguration.getBoolean("Title.NoMoney.Enable");
         } else {
-            yamlConfiguration_config.set("Title.NoMoney.Enable", true);
+            yamlConfiguration.set("Title.NoMoney.Enable", true);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Title NoM oney Enable §4was added to §9Config.yml§4!");
         }
-        if (yamlConfiguration_config.contains("Title.NoInventorySpace.Enable")) {
-            DefaultValue.Title_NoInventorySpace_Enable = yamlConfiguration_config.getBoolean("Title.NoInventorySpace.Enable");
+        if (yamlConfiguration.contains("Title.NoInventorySpace.Enable")) {
+            DefaultValue.Title_NoInventorySpace_Enable = yamlConfiguration.getBoolean("Title.NoInventorySpace.Enable");
         } else {
-            yamlConfiguration_config.set("Title.NoInventorySpace.Enable", true);
+            yamlConfiguration.set("Title.NoInventorySpace.Enable", true);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Title NoInventorySpace Enable §4was added to §9Config.yml§4!");
         }
-        if (yamlConfiguration_config.contains("Title.Give.Enable")) {
-            DefaultValue.Title_Give_Enable = yamlConfiguration_config.getBoolean("Title.Give.Enable");
+        if (yamlConfiguration.contains("Title.Give.Enable")) {
+            DefaultValue.Title_Give_Enable = yamlConfiguration.getBoolean("Title.Give.Enable");
         } else {
-            yamlConfiguration_config.set("Title.Give.Enable", true);
+            yamlConfiguration.set("Title.Give.Enable", true);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Title Give Enable §4was added to §9Config.yml§4!");
         }
-        if (yamlConfiguration_config.contains("Title.GiveReceived.Enable")) {
-            DefaultValue.Title_GiveReceived_Enable = yamlConfiguration_config.getBoolean("Title.GiveReceived.Enable");
+        if (yamlConfiguration.contains("Title.GiveReceived.Enable")) {
+            DefaultValue.Title_GiveReceived_Enable = yamlConfiguration.getBoolean("Title.GiveReceived.Enable");
         } else {
-            yamlConfiguration_config.set("Title.GiveReceived.Enable", true);
+            yamlConfiguration.set("Title.GiveReceived.Enable", true);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Title GiveReceived Enable §4was added to §9Config.yml§4!");
         }
-        if (yamlConfiguration_config.contains("Title.Gift.Enable")) {
-            DefaultValue.Title_Gift_Enable = yamlConfiguration_config.getBoolean("Title.Gift.Enable");
+        if (yamlConfiguration.contains("Title.Gift.Enable")) {
+            DefaultValue.Title_Gift_Enable = yamlConfiguration.getBoolean("Title.Gift.Enable");
         } else {
-            yamlConfiguration_config.set("Title.Gift.Enable", true);
+            yamlConfiguration.set("Title.Gift.Enable", true);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Title Gift Enable §4was added to §9Config.yml§4!");
         }
-        if (yamlConfiguration_config.contains("Title.GiftReceived.Enable")) {
-            DefaultValue.Title_GiftReceived_Enable = yamlConfiguration_config.getBoolean("Title.GiftReceived.Enable");
+        if (yamlConfiguration.contains("Title.GiftReceived.Enable")) {
+            DefaultValue.Title_GiftReceived_Enable = yamlConfiguration.getBoolean("Title.GiftReceived.Enable");
         } else {
-            yamlConfiguration_config.set("Title.GiftReceived.Enable", true);
+            yamlConfiguration.set("Title.GiftReceived.Enable", true);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Title GiftReceived Enable §4was added to §9Config.yml§4!");
         }
-        if (yamlConfiguration_config.contains("Title.PlayerNoInventorySpace.Enable")) {
-            DefaultValue.Title_PlayerNoInventorySpace_Enable = yamlConfiguration_config.getBoolean("Title.PlayerNoInventorySpace.Enable");
+        if (yamlConfiguration.contains("Title.PlayerNoInventorySpace.Enable")) {
+            DefaultValue.Title_PlayerNoInventorySpace_Enable = yamlConfiguration.getBoolean("Title.PlayerNoInventorySpace.Enable");
         } else {
-            yamlConfiguration_config.set("Title.PlayerNoInventorySpace.Enable", true);
+            yamlConfiguration.set("Title.PlayerNoInventorySpace.Enable", true);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Title PlayerNoInventorySpace Enable §4was added to §9Config.yml§4!");
         }
-        if (yamlConfiguration_config.contains("Title.PlayerNotFound.Enable")) {
-            DefaultValue.Title_PlayerNotFound_Enable = yamlConfiguration_config.getBoolean("Title.PlayerNotFound.Enable");
+        if (yamlConfiguration.contains("Title.PlayerNotFound.Enable")) {
+            DefaultValue.Title_PlayerNotFound_Enable = yamlConfiguration.getBoolean("Title.PlayerNotFound.Enable");
         } else {
-            yamlConfiguration_config.set("Title.PlayerNotFound.Enable", true);
+            yamlConfiguration.set("Title.PlayerNotFound.Enable", true);
             if (configYML.isFile()) Bukkit.getConsoleSender().sendMessage(DefaultValue.PrefixHC + "§4Setting §6Title PlayerNotFound Enable §4was added to §9Config.yml§4!");
         }
 
         try {
-            yamlConfiguration_config.save(configYML);
+            yamlConfiguration.save(configYML);
         } catch (IOException e) {
             e.printStackTrace();
         }

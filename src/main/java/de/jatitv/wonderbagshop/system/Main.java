@@ -48,7 +48,7 @@ public final class Main extends JavaPlugin {
     public static Integer SpigotID = 89234;
     public static Integer BstatsID = 10342;
     public static String Spigot = "https://www.spigotmc.org/resources/" + SpigotID;
-    public static String Discord = "https://discord.gg/vRyXFFterJ";
+    public static String Discord = "http://dc.t2code.net";
 
 
     public static Boolean Bstats = true;
